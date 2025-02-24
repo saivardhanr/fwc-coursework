@@ -1,3 +1,10 @@
+# 7447
+### What is 7447 ??
+The 7447 is a BCD-to-Seven-Segment Decoder/Driver integrated circuit (IC). BCD stands for Binary-Coded Decimal, which is a way of representing decimal numbers using four binary bits. The 7447 IC takes a BCD input and converts it into the 7-segment display format
+
+
+
+
 # Blink Program (LED Blinking using Arduino)
 The Blink program is the simplest way to understand how Arduino controls digital outputs. It turns an LED ON and OFF at regular intervals.
 
