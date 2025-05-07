@@ -1,4 +1,4 @@
-Using LaTeX
+#Using LaTeX
 This example highlights a basic usage of the LaTeX typesetting system, commonly employed for creating well-structured documents and visual elements like circuit diagrams.
 
 LaTeX (pronounced "LAY-tech" or "LAH-tech") is not a programming language in the traditional sense. Rather, it is a powerful typesetting system designed for producing high-quality technical and scientific documentation. It builds upon the TeX system, which was developed by Donald Knuth, and provides a set of macros and commands that simplify formatting, especially for documents with mathematical equations, scientific notation, and citations.
