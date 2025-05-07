@@ -1,81 +1,259 @@
-This contains steps to install fpga and run successfully
-Steps to follow:
-1) Install the zip provided i.e **fpga.zip** onto **Desktop**
-2) now open terminal and go to the fpga folder
-3) In here **/Desktop/fpga** type: **chmod +x setup.sh** --> This command is particularly useful for making scripts and programs executable. In this way, users can run them without typing their full path or using a dot slash (./) before their name.
-4) **sudo bash setup.sh**
-5) After running the above command, Go to: **file Manager --> Other Locations --> Computer --> root** . Copy the files **Symbiflow** and **Pygmy-dev** paste them in **"/desktop/fpga"**
-6) Now download **arch.tar.gz** using this below link and also place it in **/desktop/fpga**:
-   <pre>https://iith-my.sharepoint.com/:u:/g/personal/gadepall_ee_iith_ac_in/Ebot5QHEYXBAo-7n4hnvJu0B8vMrTIdj_COHJC2cmDY1ww?e=bqDxHI</pre>
-7) Make sure that **/desktop/fpga** contains **pygmy-dev**, **setup.sh** and **symbiflow** and zip file **arch.tar.gz**<br>
-8) Next:
-   At Home:
-   <pre>
-   sudo apt update -y <br>
-   sudo apt upgrade -y<br>
-   sudo apt install openssh-server sshpass build-essential libssl-dev libffi-dev python3-dev bison flex git tcl-dev tcl tcl-tclreadline libreadline-dev  autoconf libtool make automake texinfo pkg-config libusb-1.0-0 libusb-1.0-0-dev gcc-arm-none-eabi libnewlib-arm-none-eabi telnet python3 apt-utils libxslt-dev cmake curl python3-pip python3-venv -y<br>
-   pip3 install gdown lxml simplejson<br>
-   sudo apt install openssh-server sshpass<br>
-   sudo apt install build-essential libssl-dev libffi-dev python3-dev bison flex git tcl-dev tcl tcl-tclreadline libreadline-dev  autoconf libtool make automake texinfo pkg-config libusb-1.0-0 libusb-1.0-0-dev gcc-arm-none-eabi libnewlib-arm-none-eabi telnet python3 apt-utils libxslt-dev python3-lxml python3-simplejson cmake curl  python3-setuptools python3-pip<br>
-   cp arch.tar.gz /home/nikhil/Desktop/fpga/arch.tar.gz<br>
-   export INSTALL_DIR=/home/"Username"/Desktop/fpga/symbiflow<br>
-   tar -C $INSTALL_DIR  -xvf /home/nikhil/Desktop/fpga/arch.tar.gz<br>
-   export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python3:$PATH"<br>
-   cd /home/nikhil/Desktop/fpga/pygmy-dev/tools/quicklogic-fasm<br>
-   nvim requirements.txt<br>
-      Replace contents with these lines:
-         -e git+https://github.com/symbiflow/fasm.git#egg=fasm
-         -e git+https://github.com/antmicro/quicklogic-fasm-utils.git#egg=fasm-utils<br>
-      
-   python3 -m venv venv<br>
-   source venv/bin/activate<br>
+Install the zip provided i.e. fpga.zip onto Desktop
 
-   pip3 install -r requirements.txt<br>
-   sudo python3 setup.py install<br>
-   cd /home/nikhil/Desktop/fpga/pygmy-dev/tools/quicklogic-yosys<br>
-   make config-gcc<br>
-   make -j4 install PREFIX=$INSTALL_DIR<br>
-   cd /home/nikhil/Desktop/fpga/pygmy-dev/tools/yosys-symbiflow-plugins<br>
-   export PATH=$INSTALL_DIR/bin:$PATH<br>
-   make -j4 install<br>
-   cd /home/nikhil/Desktop/fpga/pygmy-dev/tools/vtr-verilog-to-routing<br>
-   make -j4<br>
-   nvim ~/.bashrc<br>
-   #paste the following 3 lines at the end of the file
-   export  INSTALL_DIR=/home/nikhil/Desktop/fpga/symbiflow
-   export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python3:$PATH"
-   export PATH=/home/nikhil/Desktop/fpga/symbiflow/bin:$PATH
-      
-   source ~/.bashrc<br>
-   vpr -h<br>
-   yosys -h<br>
-   qlfasm -h<br>
-   ql_symbiflow -h<br>
-   cd $INSTALL_DIR/quicklogic-arch-defs/tests/counter_16bit<br>
-   ls<br>
-   ql_symbiflow -compile -d ql-eos-s3 -P pd64 -v counter_16bit.v -t top -p chandalar.pcf -dump binary<br>
-   pip3 install gdown lxml simplejson<br>
-   ql_symbiflow -compile -d ql-eos-s3 -P pd64 -v counter_16bit.v -t top -p chandalar.pcf -dump binary<br>
-   ls<br>
-   cd /home/nikhil/Desktop/fpga<br>
-   ls<br>
-   mkdir fpga-examples<br>
-   cd fpga-examples<br>
-   svn co https://github.com/gadepall/vaman/trunk/fpga/setup/codes/blink<br>
-   cd blink<br>
-   ls<br>
-   
-   <b>Command to compile code:
-      
-   ql_symbiflow -compile -src /home/nikhil/Desktop/fpga/fpga-examples/blink -d ql-eos-s3 -P PU64 -v helloworldfpga.v -t helloworldfpga -p quickfeather.pcf -dump binary</b><br>
-   
-   ls<br>
-   nvim helloworldfpga.v --> This file contains the code<br> 
-   nvim quickfeather.pcf --> This file contains pin configurations<br>
-   <b>Make sure to compile the file after modifying .v or .pcf file </b><br>
-   
-   <b>Command to upload code to vaman:</b><br> 
-   #Make sure that vaman is in upload mode(i.e Green Light)<br>
-   # After Compiling the code make sure to copy the bin file and paste it in home and perform the upload command <br>
-   <b>sudo python3 /home/nikhil/TinyFPGA-Programmer-Application/tinyfpga-programmer-gui.py --port /dev/ttyACM0 --appfpga /home/nikhil/helloworldfpga.bin --mode fpga</b>
-   </pre>
+Open terminal and go to the fpga folder
+
+bash
+Copy
+Edit
+cd ~/Desktop/fpga
+Make setup script executable
+
+bash
+Copy
+Edit
+chmod +x setup.sh
+This command makes scripts and programs executable without needing to prefix them with ./.
+
+Run the setup script
+
+bash
+Copy
+Edit
+sudo bash setup.sh
+After running the above command, do the following:
+Go to: File Manager → Other Locations → Computer → root
+Copy the folders Symbiflow and Pygmy-dev and paste them into:
+
+bash
+Copy
+Edit
+/home/sai vardhan/Desktop/fpga
+Download arch.tar.gz from this link and place it in the same directory:
+Download Link
+
+Make sure /home/sai vardhan/Desktop/fpga contains the following:
+
+pygmy-dev
+
+setup.sh
+
+symbiflow
+
+arch.tar.gz
+
+Install Dependencies and Set Environment
+
+bash
+Copy
+Edit
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install openssh-server sshpass build-essential libssl-dev libffi-dev python3-dev bison flex git tcl-dev tcl tcl-tclreadline libreadline-dev autoconf libtool make automake texinfo pkg-config libusb-1.0-0 libusb-1.0-0-dev gcc-arm-none-eabi libnewlib-arm-none-eabi telnet python3 apt-utils libxslt-dev cmake curl python3-pip python3-venv -y
+pip3 install gdown lxml simplejson
+sudo apt install openssh-server sshpass
+sudo apt install build-essential libssl-dev libffi-dev python3-dev bison flex git tcl-dev tcl tcl-tclreadline libreadline-dev autoconf libtool make automake texinfo pkg-config libusb-1.0-0 libusb-1.0-0-dev gcc-arm-none-eabi libnewlib-arm-none-eabi telnet python3 apt-utils libxslt-dev python3-lxml python3-simplejson cmake curl python3-setuptools python3-pip
+cp arch.tar.gz /home/sai vardhan/Desktop/fpga/arch.tar.gz
+export INSTALL_DIR=/home/sai vardhan/Desktop/fpga/symbiflow
+tar -C "$INSTALL_DIR" -xvf /home/sai vardhan/Desktop/fpga/arch.tar.gz
+export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin
+
+
+
+
+
+
+You said:
+generate in one complete thing
+
+
+ChatGPT said:
+Sure! Here's the complete and unified guide with "nikhil" replaced by "sai vardhan" throughout:
+
+✅ FPGA Installation & Setup Guide (For User: sai vardhan)
+🔧 Step-by-step Installation and Execution
+Download and Extract Files
+
+Place the provided fpga.zip on your Desktop.
+
+Extract it to get a folder named fpga.
+
+Open Terminal and Navigate to the Folder
+
+bash
+Copy
+Edit
+cd ~/Desktop/fpga
+Make the Setup Script Executable
+
+bash
+Copy
+Edit
+chmod +x setup.sh
+This makes the script runnable directly without ./.
+
+Run the Setup Script with Superuser Privileges
+
+bash
+Copy
+Edit
+sudo bash setup.sh
+Manual File Movement
+
+Go to: File Manager → Other Locations → Computer → root
+
+Copy the folders Symbiflow and Pygmy-dev
+
+Paste them into:
+
+bash
+Copy
+Edit
+/home/sai vardhan/Desktop/fpga
+Download arch.tar.gz File
+
+Use the following link:
+Download arch.tar.gz
+
+Place the downloaded file in:
+
+bash
+Copy
+Edit
+/home/sai vardhan/Desktop/fpga
+Verify /home/sai vardhan/Desktop/fpga Contains:
+
+pygmy-dev
+
+symbiflow
+
+setup.sh
+
+arch.tar.gz
+
+🛠️ Install Dependencies and Set Environment
+bash
+Copy
+Edit
+sudo apt update -y
+sudo apt upgrade -y
+
+sudo apt install openssh-server sshpass build-essential libssl-dev libffi-dev python3-dev \
+bison flex git tcl-dev tcl tcl-tclreadline libreadline-dev autoconf libtool make automake \
+texinfo pkg-config libusb-1.0-0 libusb-1.0-0-dev gcc-arm-none-eabi libnewlib-arm-none-eabi \
+telnet python3 apt-utils libxslt-dev cmake curl python3-pip python3-venv -y
+
+pip3 install gdown lxml simplejson
+
+cp arch.tar.gz /home/sai vardhan/Desktop/fpga/arch.tar.gz
+
+export INSTALL_DIR=/home/sai vardhan/Desktop/fpga/symbiflow
+tar -C $INSTALL_DIR -xvf /home/sai vardhan/Desktop/fpga/arch.tar.gz
+export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python3:$PATH"
+🧰 Setup QuickLogic FASM
+bash
+Copy
+Edit
+cd /home/sai vardhan/Desktop/fpga/pygmy-dev/tools/quicklogic-fasm
+nvim requirements.txt
+Replace contents of requirements.txt with:
+
+bash
+Copy
+Edit
+-e git+https://github.com/symbiflow/fasm.git#egg=fasm
+-e git+https://github.com/antmicro/quicklogic-fasm-utils.git#egg=fasm-utils
+bash
+Copy
+Edit
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+sudo python3 setup.py install
+🔧 Build and Install QuickLogic Yosys Tools
+bash
+Copy
+Edit
+cd /home/sai vardhan/Desktop/fpga/pygmy-dev/tools/quicklogic-yosys
+make config-gcc
+make -j4 install PREFIX=$INSTALL_DIR
+🔧 Install Symbiflow Plugins
+bash
+Copy
+Edit
+cd /home/sai vardhan/Desktop/fpga/pygmy-dev/tools/yosys-symbiflow-plugins
+export PATH=$INSTALL_DIR/bin:$PATH
+make -j4 install
+🔧 Build Verilog-to-Routing Tool
+bash
+Copy
+Edit
+cd /home/sai vardhan/Desktop/fpga/pygmy-dev/tools/vtr-verilog-to-routing
+make -j4
+🔧 Update Bash Configuration
+bash
+Copy
+Edit
+nvim ~/.bashrc
+Append these lines at the end of the file:
+
+bash
+Copy
+Edit
+export INSTALL_DIR=/home/sai vardhan/Desktop/fpga/symbiflow
+export PATH="$INSTALL_DIR/quicklogic-arch-defs/bin:$INSTALL_DIR/quicklogic-arch-defs/bin/python3:$PATH"
+export PATH=/home/sai vardhan/Desktop/fpga/symbiflow/bin:$PATH
+bash
+Copy
+Edit
+source ~/.bashrc
+🧪 Test Installations
+bash
+Copy
+Edit
+vpr -h
+yosys -h
+qlfasm -h
+ql_symbiflow -h
+🧪 Compile Example Counter
+bash
+Copy
+Edit
+cd $INSTALL_DIR/quicklogic-arch-defs/tests/counter_16bit
+ls
+ql_symbiflow -compile -d ql-eos-s3 -P pd64 -v counter_16bit.v -t top -p chandalar.pcf -dump binary
+pip3 install gdown lxml simplejson
+ql_symbiflow -compile -d ql-eos-s3 -P pd64 -v counter_16bit.v -t top -p chandalar.pcf -dump binary
+📁 Setup Example Projects
+bash
+Copy
+Edit
+cd /home/sai vardhan/Desktop/fpga
+mkdir fpga-examples
+cd fpga-examples
+svn co https://github.com/gadepall/vaman/trunk/fpga/setup/codes/blink
+cd blink
+ls
+🔨 Compile Example Project
+bash
+Copy
+Edit
+ql_symbiflow -compile -src /home/sai vardhan/Desktop/fpga/fpga-examples/blink \
+-d ql-eos-s3 -P PU64 -v helloworldfpga.v -t helloworldfpga -p quickfeather.pcf -dump binary
+Use nvim helloworldfpga.v to view/modify the Verilog code.
+
+Use nvim quickfeather.pcf to configure pins.
+
+Recompile the project after any modification.
+
+📤 Upload Binary to Vaman Board
+Make sure:
+
+Vaman is in upload mode (green light ON)
+
+Bin file is copied to /home/sai vardhan
+
+bash
+Copy
+Edit
+sudo python3 /home/sai vardhan/TinyFPGA-Programmer-Application/tinyfpga-programmer-gui.py \
+--port /dev/ttyACM0 --appfpga /home/sai vardhan/helloworldfpga.bin --mode fpga
