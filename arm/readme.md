@@ -1,4 +1,4 @@
-# This consists of files in order to upload to Vaman_PYGMY
+# This consists of files in order to upload to Vaman_ARM
 ## Steps to follow:
 1) Open termux and follow installation steps from **vaman/installation/termuxdebian/termuxdebian_arm.txt**
 2) open main.c to edit the code to your preferences. The file main.c is available in **/data/data/com.termux/files/home/arm-examples/blink/src/main.c**
