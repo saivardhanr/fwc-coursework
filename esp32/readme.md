@@ -13,7 +13,7 @@
 6) In the **setup** file, we will get **4 files** inside it. <br>
    namely: src, .pio, platformio.ini, README.md
 7) Remember to change the main.cpp that is in src folder<br>
-   #define STASSID "Salient" **// Add your network username<br>**
+   #define STASSID "hotspot7" **// Add your network username<br>**
    #define STAPSK  "12345678" **// Add your network password<br>**
 8) Connect the arduino and vaman together, connect arduino to phone via otg and then vaman to arduino via the installation pdf. 
 9) Now we have to be in the setup directory and run <b> pio run </b>.
